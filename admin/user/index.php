@@ -1,0 +1,168 @@
+
+    <link href="<?= BASEURL; ?>assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="<?= BASEURL; ?>assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= BASEURL; ?>assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="<?= BASEURL; ?>assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= BASEURL; ?>assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= BASEURL; ?>assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
+<div class="container">
+    <div class="row">
+    	 <div class="col-sm-12">
+            <div class="card-box table-responsive">
+                <h4 class="m-t-0 header-title"><b>All Register User List</b></h4>
+              
+                <table id="datatable-buttons" class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Sponsor Info</th>
+                        <th>Current Plan</th>
+					   	<th>Plan Benefit </th>
+						<th>Binary Benefit</th>
+						<th>Change Password</th>
+                        <th>Downline</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $j=1;foreach($user as $row) : 
+                        
+                        ?>
+                    <tr> 
+                        <td><?= $j++; ?></td>  
+                        <td><strong>Sponsor Id:<?= $row->sponsor_id; ?><br>
+                            Name: <?= $row->full_name; ?><br>
+                            Mobile: <?= $row->mobile; ?><br>
+                           Email: <?= $row->email; ?><br>
+                           Position:<span class="btn btn-pink waves-effect waves-light btn-xs"><?= $row->position; ?></span><br>
+                           Register Date
+                                <?php
+                                    $IndaiDate = new DateTime($row->create_at);
+                                    $setDateTime = $IndaiDate->format("d-m-Y h:i:s a");
+                                    echo $setDateTime;
+                                ?>
+                           </strong>
+                        </td>
+                        
+                                              
+                       <td> <?php if(!empty($row->upgrade_plan)){ echo '<i class="fa fa-inr"></i> '.$row->upgrade_plan;}else{echo '<span class="btn btn-danger waves-effect waves-light btn-xs">Free Member</span>';} ?></td>
+					   <td><i class="fa fa-inr"></i> <?php if(!empty($row->plan_benifit)){ echo $row->plan_benifit; }else{echo '0.00';} ?></td>
+					   <td><i class="fa fa-inr"></i> <?php if(!empty($row->binary_benifi)){ echo $row->binary_benifi; }else{echo '0.00';} ?></td>
+					   
+                       <td class="button-demo js-modal-buttons">
+                            
+                        <a href="<?= generate_password.'?id='.$row->id;?>" class="btn btn-pink btn-custom btn-rounded waves-effect waves-light">Generate</a>
+                        </td>
+                        </td>
+                        <td><a href="<?= downline_history.'?id='.$row->sponsor_id;?>" class="btn btn-pink btn-custom btn-rounded waves-effect waves-light">Downline</a></td>
+                       <td>
+                        <form method="post" action="<?= site_url('admin/active_inactive/'.$row->id); ?>" >
+                                <select name="status" style="text-align:center;background-color: #71bf0b;color: white;font-size: 13px;border-radius: 60px;font-weight: 600;padding: 2px;"  onchange="this.form.submit();" >
+                                    <option value="" style="background-color:violet ;text-align:center;border-radius: 60px;font-weight: 600;padding: 2px;" >Select Status</option>
+                                    <option value="0" style="background-color:red;text-align:center;border-radius: 60px;font-weight: 600;padding: 2px;"<?php if($row->is_active == 0){ echo "selected='seleceted'";  } ?> >Block</option>-->
+                                    <option value="1" style="background-color:green;text-align:center;border-radius: 60px;font-weight: 600;padding: 2px;" <?php if($row->is_active == 1){ echo "selected='seleceted'";  } ?>>Active</option>
+                                </select>
+                            </form> 
+                       </td>
+                    </tr>
+                   
+            <?php endforeach;  ?> 
+                    </tbody>
+                </table>
+        <?php //} else{ echo "<h3><span class='text-danger'>Not Any Posted Blog</span></h3>";} ?>
+            </div>
+        </div>
+    </div>
+    
+    <!-- end row -->
+
+
+</div> <!-- container -->
+
+        </div> <!-- content -->
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Right content here -->
+    <!-- ============================================================== -->
+
+
+   
+</div>
+<!-- END wrapper -->
+
+<script>
+    var resizefunc = [];
+</script>
+<!-- jQuery  -->
+<script src="<?= BASEURL; ?>assets/js/jquery.min.js"></script>
+<script src="<?= BASEURL; ?>assets/js/bootstrap.min.js"></script>
+<script src="<?= BASEURL; ?>assets/js/detect.js"></script>
+<script src="<?= BASEURL; ?>assets/js/fastclick.js"></script>
+<script src="<?= BASEURL; ?>assets/js/jquery.slimscroll.js"></script>
+<script src="<?= BASEURL; ?>assets/js/jquery.blockUI.js"></script>
+<script src="<?= BASEURL; ?>assets/js/waves.js"></script>
+<script src="<?= BASEURL; ?>assets/js/wow.min.js"></script>
+<script src="<?= BASEURL; ?>assets/js/jquery.nicescroll.js"></script>
+<script src="<?= BASEURL; ?>assets/js/jquery.scrollTo.min.js"></script>
+
+<script src="<?= BASEURL; ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/dataTables.bootstrap.js"></script>
+
+<script src="<?= BASEURL; ?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/buttons.bootstrap.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/jszip.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/responsive.bootstrap.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/dataTables.scroller.min.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/dataTables.colVis.js"></script>
+<script src="<?= BASEURL; ?>assets/plugins/datatables/dataTables.fixedColumns.min.js"></script>
+
+<script src="<?= BASEURL; ?>assets/pages/datatables.init.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datatable').dataTable();
+        $('#datatable-keytable').DataTable({keys: true});
+        $('#datatable-responsive').DataTable();
+        $('#datatable-colvid').DataTable({
+            "dom": 'C<"clear">lfrtip',
+            "colVis": {
+                "buttonText": "Change columns"
+            }
+        });
+        $('#datatable-scroller').DataTable({
+            ajax: "<?= BASEURL; ?>assets/plugins/datatables/json/scroller-demo.json",
+            deferRender: true,
+            scrollY: 380,
+            scrollCollapse: true,
+            scroller: true
+        });
+        var table = $('#datatable-fixed-header').DataTable({fixedHeader: true});
+        var table = $('#datatable-fixed-col').DataTable({
+            scrollY: "300px",
+            scrollX: true,
+            scrollCollapse: true,
+            paging: false,
+            fixedColumns: {
+                leftColumns: 1,
+                rightColumns: 1
+            }
+        });
+    });
+    TableManageButtons.init();
+
+</script>
+
+</body>
+</html>
